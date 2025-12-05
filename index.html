@@ -1,23 +1,598 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "2026년 전국 사다리차가격 비교 및 견적 서비스",
+        "description": "이사, 건축, 폐기물 운반 등 목적별 2026년 최신 사다리차 요금 정보를 투명하게 제공하고, 전국 전문 업체의 비교 견적을 도와드립니다.",
+        "provider": {
+            "@type": "Organization",
+            "name": "대한민국 사다리차 가격정보 센터",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "전국 주요 지역 정보 센터 운영",
+                "addressLocality": "서울",
+                "addressRegion": "서울특별시",
+                "postalCode": "00000",
+                "addressCountry": "KR"
+            },
+            "telephone": "15XX-XXXX",
+            "url": "https://www.example.com/2026-ladder-truck-price-guide"
+        },
+        "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "대한민국 전 지역"
+        },
+        "serviceType": "사다리차 임대 및 견적 서비스",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "사다리차 유형별 가격 견적",
+            "itemListElement": [
+                {"@type":"Offer","itemOffered":{"@type":"Service","name":"원룸/소형 이사 사다리차"}},
+                {"@type":"Offer","itemOffered":{"@type":"Service","name":"일반 이사 사다리차 (5톤)"}},
+                {"@type":"Offer","itemOffered":{"@type":"Service","name":"고층 작업용 사다리차 (20층 이상)"}},
+                {"@type":"Offer","itemOffered":{"@type":"Service","name":"건축 자재 운반 사다리차"}},
+                {"@type":"Offer","itemOffered":{"@type":"Service","name":"폐기물 처리 사다리차"}}
+            ]
+        }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #3b82f6; /* 부드러운 파란색 */
+            --secondary-color: #f59e0b; /* 따뜻한 주황색 */
+            --background-light: #f9fafb; /* 아주 연한 배경 */
+            --card-background: #ffffff;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Nanum Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: var(--background-light);
+            font-size: 16px;
+        }
+
+        header, section, footer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--card-background);
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--text-dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--card-background);
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: background .3s, transform .3s;
+            font-weight: 700;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--card-background);
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background .3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .card {
+            background-color: var(--card-background);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+        }
+
+        th {
+            background-color: #e0f2fe; /* 연한 하늘색 */
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f3f4f6; /* 연한 회색 */
+        }
+
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .keywords-list li {
+            background: #bfdbfe; /* 연한 파란색 */
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .faq .item {
+            border-bottom: 1px dashed var(--border-color);
+            padding: 15px 0;
+        }
+
+        .faq h3 {
+            cursor: pointer;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .faq p {
+            padding-left: 15px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        form label {
+            display: block;
+            font-weight: 600;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        form input[type="text"],
+        form input[type="tel"],
+        form input[type="email"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .graph-container {
+            margin: 30px 0;
+            background: var(--card-background);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .external-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .external-links li {
+            margin-bottom: 10px;
+        }
+
+        .external-links a {
+            color: var(--primary-color);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: var(--text-dark);
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .attention {
+            background-color: #fef3c7; /* 경고 연노랑 */
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>2026년 최신 **사다리차가격** 완벽 분석 가이드 📈</h1>
+        <p>전국 **사다리차 비용**, **시간당 요금**, **층별 견적**을 투명하게 비교하고 가장 합리적인 가격을 찾아드립니다.</p>
+        <nav>
+            <ul>
+                <li><a href="#price-table">가격표 & 비교</a></li>
+                <li><a href="#factors">비용 결정 요인</a></li>
+                <li><a href="#regional-price">지역별 가격 정보</a></li>
+                <li><a href="#safety">안전 및 법규</a></li>
+                <li><a href="#quote">무료 견적 신청</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="price-table">
+        <h2>💰 2026년 사다리차가격 표준 요금표 및 예상 비용</h2>
+        <div class="card">
+            <p>**사다리차가격**은 단순한 운송비를 넘어, 장비의 성능, 작업 시간, 층수, 그리고 지역별 인건비가 복합적으로 작용하여 결정됩니다. 아래 표는 2026년도 기준, **전국 주요 지역**에서 일반적으로 형성되는 **사다리차 시간당 요금** 및 **층별 예상 가격**을 정리한 것입니다. 실제 견적은 현장 상황에 따라 달라질 수 있습니다.</p>
+
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>작업 유형/층수</th>
+                        <th>시간당 기본 가격 (만원)</th>
+                        <th>평균 예상 가격 (만원)</th>
+                        <th>주요 사용 목적</th>
+                    </tr>
+                    <tr>
+                        <td>**저층 (2층~5층)**</td>
+                        <td>10만 ~ 15만</td>
+                        <td>8만 ~ 15만</td>
+                        <td>원룸 이사, 가구 운반, 소량 자재 운반</td>
+                    </tr>
+                    <tr>
+                        <td>**중층 (6층~10층)**</td>
+                        <td>12만 ~ 18만</td>
+                        <td>13만 ~ 20만</td>
+                        <td>일반 포장이사 (5톤), 건축 폐기물 처리</td>
+                    </tr>
+                    <tr>
+                        <td>**고층 (11층~15층)**</td>
+                        <td>15만 ~ 25만</td>
+                        <td>18만 ~ 30만</td>
+                        <td>아파트/빌라 이사, 대형 가전 운반</td>
+                    </tr>
+                    <tr>
+                        <td>**초고층 (16층~24층)**</td>
+                        <td>20만 ~ 35만</td>
+                        <td>25만 ~ 40만</td>
+                        <td>고층 아파트 이사, 특수 건축 자재 운반</td>
+                    </tr>
+                    <tr>
+                        <td>**초장시간 대기/작업 (4시간 이상)**</td>
+                        <td>협의 (시간당 할인 적용)</td>
+                        <td>별도 견적</td>
+                        <td>대형 건축 공사, 장기 임대</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="attention">
+                <p>**필수 확인:** 제시된 가격은 평균치이며, **주말/공휴일 할증**, **작업 난이도(좁은 골목, 주차 불가)**, **장비 크기(톤수)**에 따라 최대 30%까지 변동될 수 있습니다. 정확한 **사다리차 견적**은 반드시 현장 방문 상담을 통해 확인하셔야 합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="factors">
+        <h2>🔍 사다리차가격, 무엇이 결정하는가? 7가지 핵심 요인</h2>
+        <div class="card">
+            <p>**사다리차가격**을 좌우하는 요인은 매우 복합적입니다. 단순히 층수만 높다고 비싸지는 것이 아니며, 작업 환경과 투입되는 장비의 특성에 따라 가격이 민감하게 변동됩니다. 2026년 기준으로 사다리차 견적을 산출하는 주요 7가지 요인을 자세히 분석합니다.</p>
+            <ol>
+                <li>**작업 층수 및 높이:** 가장 기본적인 요소입니다. 사다리차의 최대 작업 높이에 따라 투입되는 장비(예: 3.5톤, 5톤, 7톤 장비)가 달라지며, 이는 곧 기본요금의 차이로 이어집니다. 보통 10층을 기준으로 가격대가 크게 상승합니다.</li>
+                <li>**장비의 톤수(최대 길이):** 일반적인 이사에는 5톤 장비(24층 내외)가 많이 사용되지만, 고층 또는 짐의 무게가 무거운 건축 자재 운반 시에는 더 큰 톤수의 장비가 필요하며, 이 경우 **사다리차 비용**이 증가합니다.</li>
+                <li>**작업 소요 시간 (기본 시간 및 추가 시간):** 대부분의 사다리차 업체는 기본 1~2시간을 기준으로 **사다리차가격**을 책정합니다. 이를 초과할 경우 추가 **시간당 요금**이 발생하며, 이는 기본 요금보다 다소 높게 책정될 수 있습니다.</li>
+                <li>**지역별 인건비 및 수요:** 서울, 경기도 등 **수도권** 대도시 지역은 상대적으로 수요가 많고 인건비가 높아 지방 소도시보다 기본 **사다리차 가격**이 높게 형성되는 경향이 있습니다.</li>
+                <li>**작업의 난이도 및 특수 환경:**
+                    <ul>
+                        <li><span class="highlight">좁은 골목길/진입로:</span> 장비 진입이 어렵거나, 도로 통제로 인해 발생하는 추가 인력/장비 비용.</li>
+                        <li><span class="highlight">주차 불가능:</span> 장시간 주차로 인한 과태료 발생 가능성을 선반영.</li>
+                        <li><span class="highlight">위험물/특수 짐:</span> 대형 유리, 고가 장비, 위험한 폐기물 등 특수 운반 시 보험료 및 난이도 할증.</li>
+                    </ul>
+                </li>
+                <li>**요청 요일 및 시간 (성수기 할증):** **손 없는 날**, 주말, 공휴일은 수요가 폭증하여 평일 대비 10~30%의 **사다리차가격** 할증이 붙습니다. 특히 이사 성수기인 봄(3~5월), 가을(9~11월)에는 가격이 급등할 수 있습니다.</li>
+                <li>**왕복 운행 거리:** 사다리차 주차장부터 작업 현장까지의 거리가 매우 멀 경우, 유류비 및 출장비가 별도로 추가될 수 있습니다.</li>
+            </ol>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>📊 2026년 전국 **사다리차가격** 변동 추이 및 작업 효율성 분석</h2>
+        <div class="card">
+            <p>2026년 사다리차 시장은 유가 상승과 인건비 증가로 인해 전년 대비 평균 5~10%의 **사다리차가격** 상승이 예상됩니다. 특히 안전 기준 강화에 따른 장비 유지보수 비용 증가는 장비 임대료에 직접적인 영향을 미치고 있습니다. 따라서 견적 비교 시 단순한 가격 비교뿐만 아니라, 업체의 안전 기준 준수 여부와 보험 가입 여부를 반드시 확인해야 합니다.</p>
+
+            <div class="graph-container">
+                <h3>주요 이사 층수별 사다리차 비용 (2026년 예상)</h3>
+                <p>층수에 따른 **사다리차가격**의 비선형적 증가 추이를 보여줍니다. 고층으로 갈수록 장비의 특수성 때문에 가격 상승 폭이 커집니다.</p>
+                <pre style="text-align: left; background-color: #f7f7f7; padding: 15px; border-radius: 8px; overflow-x: auto;">
+| 층수 | 5층 이하 | 10층 | 15층 | 20층 | 24층 이상 |
+|------|---------|------|------|------|------------|
+| 비용 | ★★★☆☆ | ★★★★☆ | ★★★★★ | ★★★★★★ | ★★★★★★★ |
+| (만원) | 8~15 | 13~20 | 18~30 | 25~40 | 35~50+ |
+</pre>
+                <p>**분석:** 15층 이상부터는 중형 사다리차를 넘어선 고가 장비 투입이 필수가 되므로, **사다리차가격**이 급격하게 상승함을 알 수 있습니다.</p>
+            </div>
+
+            <p><strong>사다리차 선택의 경제학: 이사 vs. 계단 운반</strong></p>
+            <p>많은 고객들이 **사다리차가격**이 부담되어 계단 운반을 고려합니다. 하지만 3층 이상의 아파트/빌라 이사, 특히 짐이 많은 경우, 계단 운반은 인력 추가 투입과 소요 시간 증가를 야기합니다. 인건비($\text{N} \times \text{시간}$)와 사다리차 비용을 비교하면, 짐의 양이 일정 수준을 넘을 경우 **사다리차를 이용하는 것이 시간적, 경제적으로 더 효율적**인 경우가 많습니다. 사다리차는 짧은 시간 내에 안전하게 대용량 짐을 운반하여 인건비 지출을 줄여줍니다.</p>
+
+            <p><strong>전문성 강조: 사다리차 작업 안전 법규 준수</strong></p>
+            <p>사다리차는 **건설기계관리법** 및 **산업안전보건법**의 엄격한 규제를 받습니다. 운전자는 반드시 해당 장비의 면허를 소지해야 하며, 작업 현장 주변의 안전 통제, 장비 설치 시 지반 안정성 확인 등 복잡한 절차를 거칩니다. 저희 협력 업체들은 이러한 법적 요구사항을 완벽하게 충족하며, 모든 작업에 대한 <span class="highlight">영업 배상 책임 보험</span>에 가입되어 있어 혹시 모를 사고에도 고객님의 재산 피해를 최소화할 수 있습니다. **사다리차가격**을 비교할 때, 이러한 **안전 보험 가입 여부**는 절대 무시해서는 안 될 핵심 요소입니다.</p>
+
+            <p><strong>계절별 및 시간대별 **사다리차가격** 변화 패턴</strong></p>
+            <p>사다리차 수요는 계절과 시간대에 따라 극명하게 달라집니다. 특히 3월, 4월, 5월의 주말은 수요가 가장 높은 **극성수기**로 분류되어, 평일 대비 20% 이상의 할증이 붙습니다. 이 때의 **사다리차가격**은 견적 문의가 가장 많은 시기이기도 합니다. 반면, 12월~2월의 비성수기 평일 오전 시간대는 가장 합리적인 **사다리차 비용**으로 이용할 수 있는 기회입니다. 이사 계획을 세울 때 이러한 패턴을 활용하면 상당한 비용을 절감할 수 있습니다.</p>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="regional-price">
+        <h2>🗺️ 전국 주요 지역별 **사다리차가격** 비교 및 연관 키워드</h2>
+        <div class="card">
+            <p>전국 **사다리차가격**은 지역별 시장 상황, 경쟁 구도, 인건비 차이로 인해 미세하게 다릅니다. 이 섹션에서는 전국적으로 많이 검색되는 사다리차 관련 키워드와 지역명을 함께 나열하여 검색 엔진 최적화를 극대화하고, 다양한 사용자 수요를 만족시킵니다.</p>
+
+            <h3>주요 지역별 **사다리차가격** 키워드 (약 50개 이상)</h3>
+            <ul class="keywords-list">
+                <li>**사다리차가격** 서울 (강남, 송파, 서초, 용산)</li>
+                <li>**사다리차 비용** 경기 (수원, 용인, 성남, 고양, **양주이사**, 남양주)</li>
+                <li>**사다리차 요금** 인천 (부평, 연수, 송도)</li>
+                <li>**사다리차가격** 부산 (해운대, 부산진, 동래)</li>
+                <li>**사다리차 비용** 대구 (수성, 달서, 동구)</li>
+                <li>**사다리차 요금** 광주 (서구, 북구, 광산)</li>
+                <li>**사다리차가격** 대전 (서구, 유성, 중구)</li>
+                <li>**사다리차 비용** 울산 (남구, 북구, 중구)</li>
+                <li>**사다리차 요금** 세종 (조치원, 아름동)</li>
+                <li>**사다리차가격** 강원 (춘천, 원주, 강릉)</li>
+                <li>**사다리차 비용** 충북 (청주, 충주, 제천)</li>
+                <li>**사다리차 요금** 충남 (천안, 아산, 공주)</li>
+                <li>**사다리차가격** 전북 (전주, 익산, 군산)</li>
+                <li>**사다리차 비용** 전남 (목포, 순천, 여수)</li>
+                <li>**사다리차 요금** 경북 (포항, 구미, 경산)</li>
+                <li>**사다리차가격** 경남 (창원, 김해, 진주)</li>
+                <li>**사다리차 비용** 제주 (제주시, 서귀포)</li>
+                <li>**사다리차** **시간당** **가격** **투명 공개**</li>
+                <li>**사다리차** **2026년** **최신 견적**</li>
+                <li>**포장이사** **사다리차** **옵션 비용**</li>
+                <li>**건축 자재** **사다리차** **운반비**</li>
+                <li>**폐기물** **처리** **사다리차** **임대료**</li>
+                <li>**원룸** **이사** **사다리차** **할인**</li>
+                <li>**고층** **사다리차** **전문 업체**</li>
+                <li>**사다리차** **비교 견적** **사이트**</li>
+                <li>**사다리차** **주말** **할증** **여부**</li>
+                <li>**탑차** **사다리차** **이용** **비용**</li>
+                <li>**가구** **운반** **사다리차** **가격**</li>
+                <li>**용달이사** **사다리차** **추가금**</li>
+            </ul>
+
+            <h3>함께 많이 찾는 키워드 및 자동완성 키워드</h3>
+            <p>사용자들의 검색 흐름을 반영한 키워드로, 관련 전문성을 더욱 강조합니다.</p>
+            <ul>
+                <li>이사 비용 절약 팁</li>
+                <li>포장이사 가격비교</li>
+                <li>이사짐센터 추천 순위</li>
+                <li>사다리차 안전 기준 법규</li>
+                <li>이삿짐 보관 서비스 가격</li>
+                <li>용달차 비용 계산법</li>
+            </ul>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="safety">
+        <h2>🛡️ 사다리차 이용 안전 및 신뢰성 정보 (외부 링크 포함)</h2>
+        <div class="card">
+            <p>합리적인 **사다리차가격**만큼 중요한 것이 바로 **안전**입니다. 사다리차는 고위험 장비이므로, 반드시 법규를 준수하고 공신력 있는 정보를 바탕으로 업체를 선정해야 합니다. 2026년도 기준 주요 참고 정보를 제공합니다.</p>
+
+            <div class="external-links">
+                <h3>공신력 있는 외부 참고 자료</h3>
+                <ul>
+                    <li><a href="https://www.law.go.kr/LSW/main.html" target="_blank">**[법제처]** 사다리차 관련 건설기계관리법 및 운행 안전 기준 확인</a></li>
+                    <li><a href="https://www.kosha.or.kr/kosha/main.do" target="_blank">**[안전보건공단]** 고소 작업 및 사다리차 안전 작업 지침</a></li>
+                    <li><a href="https://www.kisa.or.kr/main.do" target="_blank">**[한국인터넷진흥원]** 개인정보 보호 및 온라인 거래 사기 예방 정보</a></li>
+                    <li><a href="https://namu.wiki/w/%EC%82%AC%EB%8B%A4%EB%A6%AC%EC%B0%A8" target="_blank">**[나무위키]** 사다리차의 원리 및 역사적 배경 정보</a></li>
+                    <li><a href="https://www.moel.go.kr/index.do" target="_blank">**[고용노동부]** 건설 현장 및 특수 장비 운영 관련 노동법규</a></li>
+                </ul>
+            </div>
+
+            <p><strong>사다리차 작업 전 필수 안전 점검 사항:</strong></p>
+            <ul>
+                <li>운전기사의 건설기계 조종사 면허증 유효성 확인.</li>
+                <li>장비 자체의 **정기 검사 합격 여부** 확인. (구동부, 유압 계통의 누유 여부)</li>
+                <li>**작업 반경 내** 고압선, 가로수, 간판 등 장애물 유무 사전 파악.</li>
+                <li>사다리차 설치 시 지반이 **평탄하고 견고**한지 확인하고 아웃트리거(지지대)를 완벽하게 설치했는지 확인.</li>
+                <li>작업 중 바람(풍속 10m/s 이상)이 강하게 불거나, 비/눈이 올 경우 **작업을 중단**하는 안전 원칙 준수.</li>
+            </ul>
+            <p>안전한 **사다리차 이용**은 곧 불필요한 비용 증가와 사고를 막는 지름길입니다. 가장 저렴한 **사다리차가격**만을 찾기보다, **신뢰와 안전**을 우선하는 업체를 선택하는 것이 장기적으로 가장 합리적입니다.</p>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="quote">
+        <h2>📝 합리적인 **사다리차가격**! 무료 견적 및 상담 신청 (체류 시간 극대화)</h2>
+        <div class="card">
+            <p>가장 정확하고 합리적인 **사다리차 비용**을 알아보고 싶다면, 지금 바로 상세 정보를 입력해주세요. 고객님의 이사/작업 유형, 층수, 지역 등을 면밀히 검토하여 최적의 **사다리차가격**을 제공하는 전문 업체를 연결해 드립니다. <span class="highlight">최소 3개 업체 이상</span>의 견적을 비교하여 비용을 절감하세요.</p>
+            
+            <form action="/submit-ladder-quote" method="post">
+                <h3>1단계: 기본 연락처 정보</h3>
+                <p><label for="name">성함</label><input type="text" id="name" name="name" placeholder="필수 입력" required></p>
+                <p><label for="phone">연락 가능한 전화번호</label><input type="tel" id="phone" name="phone" placeholder="예: 010-XXXX-XXXX" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required></p>
+                <p><label for="email">이메일 주소 (선택 사항)</label><input type="email" id="email" name="email" placeholder="견적서 수신용"></p>
+
+                <h3>2단계: 작업 상세 정보</h3>
+                <p><label for="type">사다리차 사용 목적</label>
+                    <select id="type" name="type" required>
+                        <option value="">선택해주세요</option>
+                        <option value="이사(포장/일반)">이사 (포장/일반)</option>
+                        <option value="건축 자재 운반">건축 자재 운반</option>
+                        <option value="폐기물/가구 처리">폐기물/가구 처리</option>
+                        <option value="기타 고소 작업">기타 고소 작업</option>
+                    </select>
+                </p>
+
+                <p><label for="start_addr">출발지 (작업 현장) 주소</label><input type="text" id="start_addr" name="start_addr" placeholder="예: 서울 강남구 테헤란로 123" required></p>
+                <p><label for="end_addr">도착지 (필요 시) 주소</label><input type="text" id="end_addr" name="end_addr" placeholder="이사가 아닐 경우 비워두세요"></p>
+
+                <p><label for="floor">작업 층수 (가장 높은 작업 층수)</label>
+                    <select id="floor" name="floor" required>
+                        <option value="">선택해주세요</option>
+                        <option value="3F 이하">3층 이하</option>
+                        <option value="4F~7F">4층 ~ 7층</option>
+                        <option value="8F~12F">8층 ~ 12층</option>
+                        <option value="13F~17F">13층 ~ 17층</option>
+                        <option value="18F~24F">18층 ~ 24층</option>
+                        <option value="25F 이상">25층 이상 (특수 장비)</option>
+                    </select>
+                </p>
+
+                <p><label for="date">희망 작업 날짜</label><input type="date" id="date" name="date" required></p>
+                <p><label for="time">희망 작업 시간대</label>
+                    <select id="time" name="time" required>
+                        <option value="">선택해주세요</option>
+                        <option value="오전 (08시~12시)">오전 (08시 ~ 12시)</option>
+                        <option value="점심 (12시~14시)">점심 (12시 ~ 14시)</option>
+                        <option value="오후 (14시~18시)">오후 (14시 ~ 18시)</option>
+                        <option value="저녁/야간 (할증 예상)">저녁/야간 (할증 예상)</option>
+                    </select>
+                </p>
+                
+                <p><label for="details">구체적인 짐/자재 내용 및 특이 사항 (상세히 기재할수록 정확한 **사다리차가격** 산출 가능)</label><textarea id="details" name="details" rows="5" placeholder="예: 5톤 포장이사, 대형 냉장고 포함, 진입로 폭 3m로 좁음, 주말 작업 희망 등" required></textarea></p>
+                
+                <button type="submit" class="cta-btn">무료 **사다리차가격** 견적 요청하기</button>
+            </form>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="faq" class="faq">
+        <h2>❓ 자주 묻는 **사다리차가격** 관련 질문 (FAQ)</h2>
+        <div class="card">
+            <div class="item">
+                <h3>Q1: **사다리차가격**은 왜 층수가 같아도 지역별로 다른가요?</h3>
+                <p>A: 지역별로 인건비 및 유류비의 차이가 있으며, 특히 수요가 많은 서울, 경기 지역은 성수기 때 장비 가동률이 높아지면서 **사다리차 비용**이 상대적으로 높게 책정될 수 있습니다. 업체의 경쟁 정도도 가격에 영향을 줍니다.</p>
+            </div>
+            
+            <div class="item">
+                <h3>Q2: **시간당** **사다리차 요금** 계산은 어떻게 되나요?</h3>
+                <p>A: 대부분의 업체는 기본 1~2시간을 최소 기준으로 하고, 이를 초과하는 시간부터는 추가 **시간당 요금**을 적용합니다. 추가 요금은 기본 요금의 약 70~100% 선에서 책정됩니다. 따라서 작업 시간을 효율적으로 관리하는 것이 중요합니다.</p>
+            </div>
+            
+            <div class="item">
+                <h3>Q3: 사다리차 이용 시 보험 가입 여부를 확인할 수 있나요?</h3>
+                <p>A: 네, 가능합니다. 신뢰할 수 있는 모든 전문 사다리차 업체는 **영업 배상 책임 보험**에 가입되어 있어야 합니다. 견적 문의 시 반드시 보험 가입 증명서를 요청하여 확인하시길 강력히 권장합니다.</p>
+            </div>
+            
+            <div class="item">
+                <h3>Q4: 이사뿐만 아니라 건축 현장에서도 **사다리차가격**은 동일한가요?</h3>
+                <p>A: 건축 현장은 이사보다 짐의 무게나 부피가 크고, 작업 시간이 길거나 불규칙할 수 있어 별도의 견적 기준이 적용됩니다. 주로 **일당**이나 **장기 임대** 계약 방식으로 진행되며, 이사보다 더 높은 톤수의 장비가 필요할 경우 **사다리차가격**이 상승합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright &copy; 2026 대한민국 사다리차 가격정보 센터. 모든 정보는 2026년도 기준 추정치이며, 실제 **사다리차가격**은 견적 상담 후 결정됩니다.</p>
+        <p>대표 전화: 15XX-XXXX | 주소: 전국 주요 지역 정보 센터 운영</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq .item h3');
+            faqItems.forEach(header => {
+                header.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                });
+                // 초기 상태에서 답변 숨기기
+                header.nextElementSibling.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+
+  
